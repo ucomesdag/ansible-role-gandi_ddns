@@ -1,0 +1,67 @@
+---
+# tasks file for gandi_ddns
+
+- name: Gather OS info
+  ansible.builtin.setup:
+    filter: ansible_distribution
+
+- name: Include vars for {{ ansible_facts['distribution'] }}
+  ansible.builtin.include_vars:
+    file: "{{ ansible_facts['distribution'] }}.yml"
+
+- name: Install dependencies
+  ansible.builtin.package:
+    name: "{{ gandi_ddns_dependencies }}"
+    state: present
+  when: gandi_ddns_dependencies
+
+- name: Install python modules
+  ansible.builtin.pip:
+    name: "{{ gandi_ddns_python_modules }}"
+    executable: pip3
+  when: gandi_ddns_python_modules
+
+- name: Create directory
+  ansible.builtin.file:
+    path: "/opt/gandi-ddns"
+    recurse: yes
+    state: directory
+
+- name: Copy gandi-ddns script
+  ansible.builtin.copy:
+    src: gandi-live-dns.py
+    dest: "/opt/gandi-ddns/gandi-live-dns.py"
+    mode: 0775
+
+- name: Add configuration
+  ansible.builtin.template:
+    src: config.py.j2
+    dest: "/opt/gandi-ddns/config.py"
+    mode: 0640
+  notify: trigger dns update
+
+- name: Install cron
+  ansible.builtin.package:
+    name: "{{ gandi_ddns_cron_package }}"
+    state: present
+  when: gandi_ddns_cron_package
+
+- name: Creates a cron file under /etc/cron.d
+  ansible.builtin.cron:
+    name: Update DNS on changes
+    weekday: "*"
+    minute: "*/5"
+    hour: "*"
+    user: root
+    job: "python3 /opt/gandi-ddns/gandi-live-dns.py >/dev/null 2>&1"
+    cron_file: gandi-ddns-autoupdate
+  notify: restart cron service
+
+- name: Add on-restart entry to the cron file
+  ansible.builtin.cron:
+    name: Update DNS on reboot
+    special_time: reboot
+    user: root
+    job: "python3 /opt/gandi-ddns/gandi-live-dns.py >/dev/null 2>&1"
+    cron_file: gandi-ddns-autoupdate
+  notify: restart cron service

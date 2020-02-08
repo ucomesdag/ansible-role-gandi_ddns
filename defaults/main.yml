@@ -1,0 +1,8 @@
+---
+# defaults file for gandi_ddns
+
+gandi_ddns_api_key:
+gandi_ddns_ttl: 300
+gandi_ddns_domain: example.com
+gandi_ddns_subdomains:
+  - www

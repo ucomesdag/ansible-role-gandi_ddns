@@ -1,0 +1,21 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: no
+  become: no
+
+  tasks:
+    - name: test connection
+      ping:
+
+    - name: run command
+      command: python3 /opt/gandi-ddns/gandi-live-dns.py --dryrun
+      register: result
+      changed_when: False
+
+    - name: verify exit code
+      assert:
+        that:
+          - result.rc == 0
+        fail_msg: gandi-live-dns dry-run failed.
+        success_msg: gandi-live-dns dry-run succeeded.

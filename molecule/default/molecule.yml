@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  ansible-later
+driver:
+  name: podman
+platforms:
+  - name: "gandi_ddns-${TOX_ENVNAME:-local}"
+    image: "${MOLECULE_DISTRO:-quay.io/ucomesdag/fedora:latest}"
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: yes
+    pre_build_image: yes
+    override_command: no
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      bin_ansible_callbacks: yes
+verifier:
+  name: ansible

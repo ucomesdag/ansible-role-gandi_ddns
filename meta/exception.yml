@@ -1,0 +1,4 @@
+---
+exceptions:
+  - variation: amazon:latest
+    reason: "Failed to get D-Bus connection: Operation not permitted"

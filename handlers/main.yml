@@ -1,0 +1,14 @@
+---
+# handlers file for gandi_ddns
+
+- name: restart cron service
+  ansible.builtin.service:
+    name: "{{ gandi_ddns_cron_service }}"
+    state: restarted
+  tags:
+    - molecule-notest
+
+- name: trigger dns update
+  ansible.builtin.command: python3 /opt/gandi-ddns/gandi-live-dns.py
+  tags:
+    - molecule-notest

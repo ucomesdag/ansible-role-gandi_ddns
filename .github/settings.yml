@@ -1,0 +1,5 @@
+---
+repository:
+  description: Update DNS records through Gandi's LiveDNS API.
+  homepage: https://mesd.ag/
+  topics: ansible, gandi, livedns, dns, playbook, role

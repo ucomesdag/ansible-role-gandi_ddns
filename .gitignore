@@ -1,0 +1,10 @@
+.molecule
+.docker
+*.log
+*.swp
+.tox
+.cache
+.vscode
+.github
+.tekton
+todo.md

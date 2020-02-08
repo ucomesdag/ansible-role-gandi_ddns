@@ -1,0 +1,49 @@
+---
+galaxy_info:
+  author: Uco Mesdag
+  namespace: ucomesdag
+  role_name: gandi_ddns
+  description: Update DNS records through Gandi's LiveDNS API.
+  license: Apache-2.0
+  company: none
+  min_ansible_version: "2.10"
+
+  platforms:
+    - name: Alpine
+      versions:
+        - any
+    - name: Amazon
+      versions:
+        - Candidate
+    - name: ArchLinux
+      versions:
+        - any
+    - name: EL
+      versions:
+        - 9
+        - 8
+    - name: Debian
+      versions:
+        - bullseye
+        - buster
+    - name: Fedora
+      versions:
+        - 36
+        - 35
+        - 34
+        - 33
+    - name: OpenSUSE
+      versions:
+        - 15.2
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+        - bionic
+
+  galaxy_tags:
+    - gandi
+    - ddns
+
+dependencies:
+  - ucomesdag.package_cache

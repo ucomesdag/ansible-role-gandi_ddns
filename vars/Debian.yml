@@ -1,0 +1,13 @@
+---
+# vars file for gandi_ddns
+
+gandi_ddns_dependencies:
+  - python3-requests
+  - python3-pip
+
+gandi_ddns_python_modules:
+  - setuptools
+  - netifaces
+
+gandi_ddns_cron_package: cron
+gandi_ddns_cron_service: cron

@@ -1,0 +1,3 @@
+[submodule "roles/ansible-role-gandi_ddns"]
+	path = roles/ansible-role-gandi_ddns
+	url = git@github.com:ucomesdag/ansible-role-gandi_ddns.git
