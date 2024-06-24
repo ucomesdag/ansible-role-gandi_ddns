@@ -1,0 +1,21 @@
+graph {
+
+  node [margin="0.05,0.09" height=0 width=0 shape=box fontname="Sans serif" fontsize="9.5"];
+
+  fontsize="8.5";
+  fontname="Sans serif";
+
+  label="ansible role depencencies";
+
+  layout=dot;
+  splines=compound;
+  concentrate=true;
+  center=treu;
+  dpi=300;
+
+  {
+    "gandi_ddns"
+    "none" [shape=plaintext] 
+  }
+  "gandi_ddns" -- "none"
+}
