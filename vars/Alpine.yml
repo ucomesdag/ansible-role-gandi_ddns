@@ -8,6 +8,5 @@ gandi_ddns_dependencies:
   - py3-netifaces
 
 gandi_ddns_python_modules: []
-
 gandi_ddns_cron_package: cronie
 gandi_ddns_cron_service: cronie

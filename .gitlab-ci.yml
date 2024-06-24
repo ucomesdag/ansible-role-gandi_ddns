@@ -5,7 +5,7 @@ services:
   - docker:dind
 
 variables:
-  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_HOST: tcp://docker:2375
   PY_COLORS: 1
 
 molecule:
@@ -16,26 +16,26 @@ molecule:
   retry: 1
   parallel:
     matrix:
-      - image: "amazonlinux"
-        tag: "latest"
-      - image: "centos"
+      - image: amazonlinux
+        tag: latest
+      - image: centos
         tag: "7"
-      - image: "centos"
-        tag: "latest"
-      - image: "debian"
-        tag: "latest"
-      - image: "debian"
-        tag: "bullseye"
-      - image: "fedora"
+      - image: centos
+        tag: latest
+      - image: debian
+        tag: latest
+      - image: debian
+        tag: bullseye
+      - image: fedora
         tag: "32"
-      - image: "fedora"
-        tag: "latest"
-      - image: "opensuse"
-        tag: "latest"
-      - image: "ubuntu"
-        tag: "latest"
-      - image: "ubuntu"
-        tag: "bionic"
+      - image: fedora
+        tag: latest
+      - image: opensuse
+        tag: latest
+      - image: ubuntu
+        tag: latest
+      - image: ubuntu
+        tag: bionic
 
 galaxy:
   script:

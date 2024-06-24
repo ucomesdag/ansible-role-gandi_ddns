@@ -1,8 +1,8 @@
 ---
 - name: Verify
   hosts: all
-  gather_facts: no
-  become: no
+  gather_facts: false
+  become: false
 
   tasks:
     - name: test connection
@@ -11,7 +11,7 @@
     - name: run command
       command: python3 /opt/gandi-ddns/gandi-live-dns.py --dryrun
       register: result
-      changed_when: False
+      changed_when: false
 
     - name: verify exit code
       assert:

@@ -23,21 +23,21 @@
 
 - name: Create directory
   ansible.builtin.file:
-    path: "/opt/gandi-ddns"
-    recurse: yes
+    path: /opt/gandi-ddns
+    recurse: true
     state: directory
 
 - name: Copy gandi-ddns script
   ansible.builtin.copy:
     src: gandi-live-dns.py
-    dest: "/opt/gandi-ddns/gandi-live-dns.py"
-    mode: 0775
+    dest: /opt/gandi-ddns/gandi-live-dns.py
+    mode: "0775"
 
 - name: Add configuration
   ansible.builtin.template:
     src: config.py.j2
-    dest: "/opt/gandi-ddns/config.py"
-    mode: 0640
+    dest: /opt/gandi-ddns/config.py
+    mode: "0640"
   notify: trigger dns update
 
 - name: Install cron
@@ -53,7 +53,7 @@
     minute: "*/5"
     hour: "*"
     user: root
-    job: "python3 /opt/gandi-ddns/gandi-live-dns.py >/dev/null 2>&1"
+    job: python3 /opt/gandi-ddns/gandi-live-dns.py >/dev/null 2>&1
     cron_file: gandi-ddns-autoupdate
   notify: restart cron service
 
@@ -62,6 +62,6 @@
     name: Update DNS on reboot
     special_time: reboot
     user: root
-    job: "python3 /opt/gandi-ddns/gandi-live-dns.py >/dev/null 2>&1"
+    job: python3 /opt/gandi-ddns/gandi-live-dns.py >/dev/null 2>&1
     cron_file: gandi-ddns-autoupdate
   notify: restart cron service
